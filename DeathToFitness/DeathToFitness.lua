@@ -1,12 +1,20 @@
+-- Hard-coding a set number of exercise that the user can be told to do
+local exercises = {"push-ups", "sit-ups", "squats", "second(s) of planking", "lunges"}
+
+-- Initalizing the event frame
 local Exercise_EventFrame = CreateFrame("Frame")
 
+-- Setting the event frame to listen for a player death
 Exercise_EventFrame:RegisterEvent("PLAYER_DEAD")
 
+-- Creating the script to execute when the event is triggered
 Exercise_EventFrame:SetScript("OnEvent",
     function(self, event, ...)
-        -- Initalize current and max boss health pools
+        -- Initalize current and max boss health pools, along with the number of the exercise to do and the exercise itself
         local currentHealth = 0
         local maxHealth = 0
+        local calculatedNum = 0
+        local exerciseToDo = ""
         
         -- If there is at least one boss (This will prevent anything from printing when dying to trash)
         if UnitHealth("boss1") ~= 0 then
@@ -31,7 +39,13 @@ Exercise_EventFrame:SetScript("OnEvent",
                 currentHealth = UnitHealth("boss1")
                 maxHealth = UnitHealthMax("boss1")
             end
-            -- Calculate and print the amount of exercise to do.
-            print("Amount of exercise: " .. math.floor(((currentHealth / maxHealth) * 100) / 2))
+
+            -- Calculate the amount of the exercise to do
+            calculatedNum = math.floor(((currentHealth / maxHealth) * 100) / 2)
+            -- Randomly get an exercise to do
+            exerciseToDo = exercises[math.random(0, table.getn(exercises))]
+
+            -- Print a string with the amount of the exercise to do
+            print("You need to do " .. calculatedNum .. " " .. exerciseToDo)
 		end
     end)
