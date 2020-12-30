@@ -4,4 +4,4 @@
 ## Author: oppo0990
 ## Version: 0.1
 
-main.lua
+DeathToFitness.lua
