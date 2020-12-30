@@ -1,0 +1,7 @@
+## Interface: 90002
+## Title: DeathToFitness
+## Notes: Used to encourage exercise when dead in a raid/dungeon
+## Author: oppo0990
+## Version: 0.1
+
+main.lua
