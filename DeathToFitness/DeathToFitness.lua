@@ -45,7 +45,21 @@ Exercise_EventFrame:SetScript("OnEvent",
             -- Randomly get an exercise to do
             exerciseToDo = exercises[math.random(0, table.getn(exercises))]
 
-            -- Print a string with the amount of the exercise to do
-            print("You need to do " .. calculatedNum .. " " .. exerciseToDo)
+            -- Create/modify a popup dialog which contains the amount of exercise to do
+            StaticPopupDialogs["WORKOUT_DIALOG"] = {
+                text = "You need to do " .. calculatedNum .. " " .. exerciseToDo,
+                button1 = OKAY,
+                timeout = 0,
+                whileDead = true,
+                hideOnEscape = true,
+                preferredIndex = 3,
+            }
+
+            -- Display the dialog box
+            StaticPopup_Show ("WORKOUT_DIALOG")
+
+
+            -- Print the amount of exercise to do to the chat window (Used for debugging)
+            --print("You need to do " .. calculatedNum .. " " .. exerciseToDo)
 		end
     end)
