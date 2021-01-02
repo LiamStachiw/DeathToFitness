@@ -1,13 +1,21 @@
 -- Hard-coding a set number of exercise that the user can be told to do
 local exercises = {"push-ups", "sit-ups", "squats", "second(s) of planking", "lunges"}
 
--- Initalizing the event frame
+-- Initalizing the event frames
 local Exercise_EventFrame = CreateFrame("Frame")
+local Resurrect_EventFrame = CreateFrame("Frame")
 
--- Setting the event frame to listen for a player death
+-- Setting the event frames to listen for a player death and a resurrection request respectively
 Exercise_EventFrame:RegisterEvent("PLAYER_DEAD")
+Resurrect_EventFrame:RegisterEvent("RESURRECT_REQUEST")
 
--- Creating the script to execute when the event is triggered
+-- Creating the script that will execute when the resurrect event is triggered
+Resurrect_EventFrame:SetScript("OnEvent",
+    function(self, event, ...)
+        StaticPopup_Hide ("WORKOUT_DIALOG")
+    end)
+
+-- Creating the script to execute when the death event is triggered
 Exercise_EventFrame:SetScript("OnEvent",
     function(self, event, ...)
         -- Initalize current and max boss health pools, along with the number of the exercise to do and the exercise itself
