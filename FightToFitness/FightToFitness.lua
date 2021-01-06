@@ -4,10 +4,21 @@ local exercises = {"push-ups", "sit-ups", "squats", "second(s) of planking", "lu
 -- Initalizing the event frames
 local Exercise_EventFrame = CreateFrame("Frame")
 local Resurrect_EventFrame = CreateFrame("Frame")
+local Wipe_EventFrame = CreateFrame("Frame")
 
--- Setting the event frames to listen for a player death and a resurrection request respectively
+-- Setting the event frames to listen for a different events that will fire different event handlers
 Exercise_EventFrame:RegisterEvent("PLAYER_DEAD")
 Resurrect_EventFrame:RegisterEvent("RESURRECT_REQUEST")
+Wipe_EventFrame:RegisterEvent("ENCOUNTER_END")
+
+-- Create the event handler function for the wipe event
+local function wipeHandler(self, event, ...)
+    local encounterID, encounterName, difficultyID, groupSize, success = ...
+    -- If the encounter was not sucessful (a wipe) then hide the exercise frame. (A wipe implies the death was not the player's fault)
+    if success == 0 then
+        StaticPopup_Hide ("WORKOUT_DIALOG")
+    end
+end
 
 -- Create the event handler function for the resurrection event
 local function resurrectHandler(self, event, ...)
@@ -76,6 +87,9 @@ local function deathHandler(self, event, ...)
         --print("You need to do " .. calculatedNum .. " " .. exerciseToDo)
     end
 end
+
+-- Creating the script that will execute when the wipe event is triggered
+Wipe_EventFrame:SetScript("OnEvent", wipeHandler)
 
 -- Creating the script that will execute when the resurrect event is triggered
 Resurrect_EventFrame:SetScript("OnEvent", resurrectHandler)
