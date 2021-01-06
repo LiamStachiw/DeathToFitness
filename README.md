@@ -6,3 +6,5 @@ Upon death, the addon will take the percentage of the boss's remaining health an
 
 
 The suggested amount of exercise will be between 5 and 50.
+
+This addon is currently hosted at: https://www.curseforge.com/wow/addons/fighttofitness
