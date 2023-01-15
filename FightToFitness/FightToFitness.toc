@@ -1,7 +1,7 @@
-## Interface: 90205
+## Interface: 100002
 ## Title: FightToFitness
 ## Notes: Used to encourage exercise when dying to a boss in a raid/dungeon
 ## Author: oppo0990
-## Version: 1.2.5
+## Version: 1.2.6
 
 FightToFitness.lua
